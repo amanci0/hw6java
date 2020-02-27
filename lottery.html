@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Quick Pick Lottery</title>
+	<style type="text/css">
+		body {color: #fff; background-color: #0072BB; text-align: center; font-family: avenir;}
+		input {text-align: center; font-color: #fff; font-size: 20px; background-color: #1E91D6; border-color: #0072BB; padding: 15px; border-style: solid; font-family: avenir;}
+		.main-button {text-align: center; font-size: 20px; background-color: #9FD356; border: none;}
+		header {color: #9FD356;text-align: center; font-size: 30px; padding: 30px; font-weight: bold;}
+	</style>
+</head>
+
+<body>
+	<header>LUCKY FOR LIFE LOTTERY</header>
+	
+	<script language="javascript">
+
+		randomArray = new Array(5);
+		for (i = 0; i < randomArray.length; i++) {
+			randomArray[i] = parseInt(Math.random() * 47 + 1); 	
+			document.write(randomArray[i], ", ");
+		}
+		randomLucky = parseInt(Math.random() * 17 + 1); //lucky ball random//
+		document.write("   Lucky Ball: ",randomLucky);
+
+		function check()
+		{
+			randomArray.sort(function(a,b) {return a-b});
+			document.getElementById("sortedNums").innerHTML = randomArray;
+
+			userPreSplit = document.form1.userNum.value;
+			userArray = userPreSplit.split(" ");
+			console.log(userArray);
+			document.getElementById("userNums").innerHTML = userArray;
+			luckyBall = document.form1.userLuckyBall.value;	
+			counter = 0;
+			for (i = 0; i < randomArray.length; i++) {
+				for (j = 0; j < userArray.length; j++) {	
+					if (randomArray[i] == userArray[j]) {
+						counter = counter + 1;
+					}
+
+				}
+			}
+
+			if ((counter == 0) && (luckyBall == randomLucky)) {//0 matches + ball
+				document.getElementById("result").innerHTML = "You won $4!";
+			}	
+			else if ((counter == 1) && (luckyBall == randomLucky)) {//1 match + ball
+				document.getElementById("result").innerHTML = "You won $6!";
+			} 			
+			else if ((counter == 2) && (luckyBall == randomLucky)) {//2 matches + ball
+				document.getElementById("result").innerHTML = "You won $25!";
+			} 
+			else if ((counter == 3) && (luckyBall == randomLucky)) {//3 matches + ball
+				document.getElementById("result").innerHTML = "You won $150!";
+			} 
+			else if ((counter == 4) && (luckyBall == randomLucky)) {//4 matches + ball
+				document.getElementById("result").innerHTML = "You won $5,000!";
+			} 
+			else if ((counter == 5) && (luckyBall == randomLucky)) {//5 matches + ball
+				document.getElementById("result").innerHTML = "You won $7,000 a WEEK for LIFE!";
+			} 
+			else if ((counter == 2) && (luckyBall != randomLucky)) {//2 matches 
+				document.getElementById("result").innerHTML = "You won $3!";
+			} 
+			else if ((counter == 3) && (luckyBall != randomLucky)) {//3 matches
+				document.getElementById("result").innerHTML = "You won $20!";
+			} 
+			else if ((counter == 4) && (luckyBall != randomLucky)) {//4 matches
+				document.getElementById("result").innerHTML = "You won $200!";
+			} 			
+			else if ((counter == 5) && (luckyBall != randomLucky)) {//5 matches
+				document.getElementById("result").innerHTML = "You won $25,000 a YEAR for LIFE!";
+			} 
+			else {
+				document.getElementById("result").innerHTML = "No Matches!";
+			}
+		}
+	</script>
+
+		<form name = "form1">
+			Pick 5 numbers, 1 to 48, use space to separate <input type="text" name ="userNum" id="userNum"><br />
+			Pick a Lucky Ball number, 1 to 18 <input type="text" name ="userLuckyBall" id="userLuckyBall"><br />
+			<hr />	
+			<input class = "main-button" type="button" value="CHECK" 
+				onclick="check()">
+		</form>
+		
+		<h2>Winning Numbers:<h3 id = "sortedNums"> </h3></h2>
+		<h2>Your Numbers:<h3 id = "userNums"> </h3></h2>
+		<h3 id = "result"> </h3>
+</body>
+</html>
